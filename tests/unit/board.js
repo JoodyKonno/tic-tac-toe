@@ -1,6 +1,8 @@
+/* global describe it expect */
+
 const GameBoard = require('../../lib/GameBoard');
 
-let gameBoard = new GameBoard();
+const gameBoard = new GameBoard();
 
 describe('gameBoard.js', () => {
   describe('getBoard()', () => {
