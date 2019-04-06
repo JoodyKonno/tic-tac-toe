@@ -68,4 +68,28 @@ describe('gameBoard.js', () => {
       });
     });
   });
+
+  describe('isFilled()', () => {
+    context('when not all fields were taken', () => {
+      it('returns false', () => {
+        expect(gameBoard.isFilled()).to.be.false();
+      });
+    });
+
+    context('when all fileds were taken', () => {
+      it('returns true', () => {
+        gameBoard.input('X', [0, 0])
+          .input('O', [0, 1])
+          .input('X', [0, 2])
+          .input('O', [1, 0])
+          .input('O', [1, 1])
+          .input('X', [1, 2])
+          .input('X', [2, 0])
+          .input('X', [2, 1])
+          .input('O', [2, 2]);
+
+        expect(gameBoard.isFilled()).to.be.true();
+      });
+    });
+  });
 });

@@ -33,4 +33,12 @@ describe('Game', () => {
       expect(game.getBoardFields()).to.be.deep.equal(expectedOutput);
     });
   });
+
+  describe('getResult()', () => {
+    context('when it is not finished', () => {
+      it('returns "not finished"', () => {
+        expect(game.getResult()).to.be.equals('not finished');
+      });
+    });
+  });
 });
