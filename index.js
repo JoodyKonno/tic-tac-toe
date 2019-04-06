@@ -1,14 +1,12 @@
+const Game = require('./lib/Game');
 const GameBoard = require('./lib/GameBoard');
+const Player = require('./lib/Player');
 
-const gameBoard = new GameBoard();
+const game = new Game(new Player('Meat Ball'), new Player('Big Fetus'), new GameBoard());
 
-console.log('Tic Tac Toe game');
-console.log(gameBoard.getBoard());
+console.log('Starting Tic Tac Toe Game');
 
-gameBoard.input('O', [0, 1]);
-console.log('Player 1 takes 0,1');
-console.log(gameBoard.getBoard());
+console.log(`Player 1: ${game.getPlayer1Name()} with '${game.getPlayer1Char()}'`);
+console.log(`Player 2: ${game.getPlayer2Name()} with '${game.getPlayer2Char()}'`);
 
-gameBoard.input('X', [1, 1]);
-console.log('Player 2 takes 1,1');
-console.log(gameBoard.getBoard());
+console.log(game.getBoard());

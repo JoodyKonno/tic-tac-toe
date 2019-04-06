@@ -4,16 +4,12 @@ const Game = require('../../lib/Game');
 const Player = require('../../lib/Player');
 const GameBoard = require('../../lib/GameBoard');
 
-const player1 = new Player('meat ball');
-const player2 = new Player('big fetus');
-const board = new GameBoard();
-
 let game;
 
 describe('Game', () => {
   describe('constructor()', () => {
     beforeEach(() => {
-      game = new Game(player1, player2, board);
+      game = new Game(new Player('meat ball'), new Player('big fetus'), new GameBoard());
     });
 
     it('set the char "X" to the first player', () => {
