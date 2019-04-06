@@ -135,5 +135,35 @@ describe('gameBoard.js', () => {
         });
       });
     });
+
+    describe('hasDiagonalMatches', () => {
+      context('when it has diagonal matches', () => {
+        it('returns true', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [1, 1])
+            .input('X', [2, 2]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.true();
+        });
+
+        it('returns true', () => {
+          gameBoard.input('X', [0, 2])
+            .input('X', [1, 1])
+            .input('X', [2, 0]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.true();
+        });
+      });
+
+      context('when it has diagonal matches', () => {
+        it('returns false', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [1, 1])
+            .input('O', [2, 2]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.false();
+        });
+      });
+    });
   });
 });
