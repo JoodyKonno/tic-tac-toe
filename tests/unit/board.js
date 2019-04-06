@@ -44,5 +44,11 @@ describe('gameBoard.js', () => {
         expect(() => gameBoard.input('O', [0, 30])).to.throw(OutOfBoundsError);
       });
     });
+
+    context('when it is an invalid coordinate type', () => {
+      it('throws an error', () => {
+        expect(() => gameBoard.input('O', [0, 'x'])).to.throw(OutOfBoundsError);
+      });
+    });
   });
 });
