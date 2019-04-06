@@ -40,5 +40,35 @@ describe('Game', () => {
         expect(game.getResult()).to.be.equals('not finished');
       });
     });
+
+    context('when it has a vertical match', () => {
+      it('returns "finished"', () => {
+        game.play(game.player1, [0, 0]);
+        game.play(game.player1, [1, 0]);
+        game.play(game.player1, [2, 0]);
+
+        expect(game.getResult()).to.be.equals('finished');
+      });
+    });
+
+    context('when it has a horizontal match', () => {
+      it('returns "finished"', () => {
+        game.play(game.player1, [0, 0]);
+        game.play(game.player1, [0, 1]);
+        game.play(game.player1, [0, 2]);
+
+        expect(game.getResult()).to.be.equals('finished');
+      });
+    });
+
+    context('when it has a diagonal match', () => {
+      it('returns "finished"', () => {
+        game.play(game.player1, [0, 0]);
+        game.play(game.player1, [1, 1]);
+        game.play(game.player1, [2, 2]);
+
+        expect(game.getResult()).to.be.equals('finished');
+      });
+    });
   });
 });

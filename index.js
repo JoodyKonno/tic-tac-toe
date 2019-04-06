@@ -23,3 +23,21 @@ console.log(`${game.getPlayer2Name()} plays on [0, 0]`);
 
 console.log(game.getBoard());
 console.log(`Game is ${game.getResult()}`);
+
+game.play(game.getPlayer1(), [0, 2]);
+console.log(`${game.getPlayer1Name()} plays on [0, 2]`);
+
+console.log(game.getBoard());
+console.log(`Game is ${game.getResult()}`);
+
+game.play(game.getPlayer2(), [2, 2]);
+console.log(`${game.getPlayer2Name()} plays on [2, 2]`);
+
+console.log(game.getBoard());
+console.log(`Game is ${game.getResult()}`);
+
+game.play(game.getPlayer1(), [2, 0]);
+console.log(`${game.getPlayer1Name()} plays on [2, 0]`);
+
+console.log(game.getBoard());
+console.log(`Game is ${game.getResult()}`);
