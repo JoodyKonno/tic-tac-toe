@@ -91,5 +91,27 @@ describe('gameBoard.js', () => {
         expect(gameBoard.isFilled()).to.be.true();
       });
     });
+
+    describe('hasVerticalMathches()', () => {
+      context('when it has vertical matches', () => {
+        it('returns true', () => {
+          gameBoard.input('X', [0, 1])
+            .input('X', [1, 1])
+            .input('X', [2, 1]);
+
+          expect(gameBoard.hasVerticalMatches('X')).to.be.true();
+        });
+      });
+
+      context('when it has no vertical matches', () => {
+        it('returns false', () => {
+          gameBoard.input('X', [0, 1])
+            .input('X', [1, 1])
+            .input('O', [2, 1]);
+
+          expect(gameBoard.hasVerticalMatches('X')).to.be.false();
+        });
+      });
+    });
   });
 });
