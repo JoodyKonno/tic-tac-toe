@@ -10,3 +10,13 @@ console.log(`Player 1: ${game.getPlayer1Name()} with '${game.getPlayer1Char()}'`
 console.log(`Player 2: ${game.getPlayer2Name()} with '${game.getPlayer2Char()}'`);
 
 console.log(game.getBoard());
+
+game.play(game.getPlayer1(), [1, 1]);
+console.log(`${game.getPlayer1Name()} plays on [1, 1]`);
+
+console.log(game.getBoard());
+
+game.play(game.getPlayer2(), [0, 0]);
+console.log(`${game.getPlayer2Name()} plays on [0, 0]`);
+
+console.log(game.getBoard());
