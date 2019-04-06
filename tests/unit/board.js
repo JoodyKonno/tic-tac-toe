@@ -2,7 +2,10 @@
 
 const GameBoard = require('../../lib/GameBoard');
 
-const OutOfBoundsError = require('../../lib/OutOfBoundsError');
+const {
+  InvalidInputError,
+  OutOfBoundsError,
+} = require('../../lib/CustomErrors');
 
 let gameBoard;
 
@@ -48,6 +51,12 @@ describe('gameBoard.js', () => {
     context('when it is an invalid coordinate type', () => {
       it('throws an error', () => {
         expect(() => gameBoard.input('O', [0, 'x'])).to.throw(OutOfBoundsError);
+      });
+    });
+
+    context('when an invalid char is input', () => {
+      it('throws an error', () => {
+        expect(() => gameBoard.input('nya', [0, 1])).to.throw(InvalidInputError);
       });
     });
   });
