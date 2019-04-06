@@ -68,4 +68,102 @@ describe('gameBoard.js', () => {
       });
     });
   });
+
+  describe('isFilled()', () => {
+    context('when not all fields were taken', () => {
+      it('returns false', () => {
+        expect(gameBoard.isFilled()).to.be.false();
+      });
+    });
+
+    context('when all fileds were taken', () => {
+      it('returns true', () => {
+        gameBoard.input('X', [0, 0])
+          .input('O', [0, 1])
+          .input('X', [0, 2])
+          .input('O', [1, 0])
+          .input('O', [1, 1])
+          .input('X', [1, 2])
+          .input('X', [2, 0])
+          .input('X', [2, 1])
+          .input('O', [2, 2]);
+
+        expect(gameBoard.isFilled()).to.be.true();
+      });
+    });
+
+    describe('hasVerticalMathches()', () => {
+      context('when it has vertical matches', () => {
+        it('returns true', () => {
+          gameBoard.input('X', [0, 1])
+            .input('X', [1, 1])
+            .input('X', [2, 1]);
+
+          expect(gameBoard.hasVerticalMatches('X')).to.be.true();
+        });
+      });
+
+      context('when it has no vertical matches', () => {
+        it('returns false', () => {
+          gameBoard.input('X', [0, 1])
+            .input('X', [1, 1])
+            .input('O', [2, 1]);
+
+          expect(gameBoard.hasVerticalMatches('X')).to.be.false();
+        });
+      });
+    });
+
+    describe('hasHorizontalMatches()', () => {
+      context('when it has horizontal matches', () => {
+        it('returns true', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [0, 1])
+            .input('X', [0, 2]);
+
+          expect(gameBoard.hasHorizontalMatches('X')).to.be.true();
+        });
+      });
+
+      context('when it has no horizontal matches', () => {
+        it('returns false', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [0, 1])
+            .input('O', [0, 2]);
+
+          expect(gameBoard.hasHorizontalMatches('X')).to.be.false();
+        });
+      });
+    });
+
+    describe('hasDiagonalMatches', () => {
+      context('when it has diagonal matches', () => {
+        it('returns true', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [1, 1])
+            .input('X', [2, 2]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.true();
+        });
+
+        it('returns true', () => {
+          gameBoard.input('X', [0, 2])
+            .input('X', [1, 1])
+            .input('X', [2, 0]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.true();
+        });
+      });
+
+      context('when it has diagonal matches', () => {
+        it('returns false', () => {
+          gameBoard.input('X', [0, 0])
+            .input('X', [1, 1])
+            .input('O', [2, 2]);
+
+          expect(gameBoard.hasDiagonalMatches('X')).to.be.false();
+        });
+      });
+    });
+  });
 });
