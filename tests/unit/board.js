@@ -5,6 +5,7 @@ const GameBoard = require('../../lib/GameBoard');
 const {
   InvalidInputError,
   OutOfBoundsError,
+  TakenFieldError,
 } = require('../../lib/CustomErrors');
 
 let gameBoard;
@@ -57,6 +58,13 @@ describe('gameBoard.js', () => {
     context('when an invalid char is input', () => {
       it('throws an error', () => {
         expect(() => gameBoard.input('nya', [0, 1])).to.throw(InvalidInputError);
+      });
+    });
+
+    context('when it inputs in an already taken field', () => {
+      it('throws an error', () => {
+        gameBoard.input('X', [0, 0]);
+        expect(() => gameBoard.input('O', [0, 0])).to.throw(TakenFieldError);
       });
     });
   });
