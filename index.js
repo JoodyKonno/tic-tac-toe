@@ -1,6 +1,21 @@
+const readLine = require('readline');
+
 const Game = require('./lib/Game');
 const GameBoard = require('./lib/GameBoard');
 const Player = require('./lib/Player');
+
+const rl = readLine.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+
+rl.question('What do you think of Node.js? ', (answer) => {
+  // TODO: Log the answer in a database
+  console.log(`Thank you for your valuable feedback: ${answer}`);
+
+  rl.close();
+});
 
 const game = new Game(new Player('Meat Ball'), new Player('Big Fetus'), new GameBoard());
 

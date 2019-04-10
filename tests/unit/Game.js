@@ -57,7 +57,7 @@ describe('Game', () => {
         game.play(game.player1, [1, 0]);
         game.play(game.player1, [2, 0]);
 
-        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
+        expect(game.getResult()).to.be.equals('meat ball is the winner');
       });
     });
 
@@ -67,7 +67,7 @@ describe('Game', () => {
         game.play(game.player1, [0, 1]);
         game.play(game.player1, [0, 2]);
 
-        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
+        expect(game.getResult()).to.be.equals('meat ball is the winner');
       });
     });
 
@@ -77,7 +77,7 @@ describe('Game', () => {
         game.play(game.player1, [1, 1]);
         game.play(game.player1, [2, 2]);
 
-        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
+        expect(game.getResult()).to.be.equals('meat ball is the winner');
       });
     });
   });
