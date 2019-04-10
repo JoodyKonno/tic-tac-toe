@@ -3,56 +3,39 @@ const readLine = require('readline');
 const Game = require('./lib/Game');
 const GameBoard = require('./lib/GameBoard');
 const Player = require('./lib/Player');
+const GameStates = require('./lib/GameStates');
 
 const rl = readLine.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
+const Player1 = new Player('Meat Ball', 'X');
+const Player2 = new Player('Big Fetus', 'O');
 
-rl.question('What do you think of Node.js? ', (answer) => {
-  // TODO: Log the answer in a database
-  console.log(`Thank you for your valuable feedback: ${answer}`);
-
-  rl.close();
-});
-
-const game = new Game(new Player('Meat Ball'), new Player('Big Fetus'), new GameBoard());
+const game = new Game(Player1, Player2, new GameBoard());
 
 console.log('Starting Tic Tac Toe Game');
 
 console.log(`Player 1: ${game.getPlayer1Name()} with '${game.getPlayer1Char()}'`);
 console.log(`Player 2: ${game.getPlayer2Name()} with '${game.getPlayer2Char()}'`);
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+rl.on('line', (input) => {
+  console.log(`${game.getPlayer1Name()} plays on [${input}]`);
 
-game.play(game.getPlayer1(), [1, 1]);
-console.log(`${game.getPlayer1Name()} plays on [1, 1]`);
+  try {
+    const pos = input
+      .split(',')
+      .map(item => parseInt(item, 10));
+    game.play(pos);
+  } catch (err) {
+    console.error(err.message);
+  }
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+  console.log(game.getBoard());
+  console.log(`Game is ${game.getResult()}`);
 
-game.play(game.getPlayer2(), [0, 0]);
-console.log(`${game.getPlayer2Name()} plays on [0, 0]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
-
-game.play(game.getPlayer1(), [0, 2]);
-console.log(`${game.getPlayer1Name()} plays on [0, 2]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
-
-game.play(game.getPlayer2(), [2, 2]);
-console.log(`${game.getPlayer2Name()} plays on [2, 2]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
-
-game.play(game.getPlayer1(), [2, 0]);
-console.log(`${game.getPlayer1Name()} plays on [2, 0]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+  if (game.getResult() !== GameStates.IN_PROGRESS) {
+    process.exit(0);
+  }
+});
