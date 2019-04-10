@@ -4,6 +4,8 @@ const Game = require('../../lib/Game');
 const Player = require('../../lib/Player');
 const GameBoard = require('../../lib/GameBoard');
 
+const GameStates = require('../../lib/GameStates');
+
 let game;
 
 describe('Game', () => {
@@ -37,7 +39,7 @@ describe('Game', () => {
   describe('getResult()', () => {
     context('when it is not finished', () => {
       it('returns "not finished"', () => {
-        expect(game.getResult()).to.be.equals('not finished');
+        expect(game.getResult()).to.be.equals(GameStates.IN_PROGRESS);
       });
     });
 
@@ -47,7 +49,7 @@ describe('Game', () => {
         game.play(game.player1, [1, 0]);
         game.play(game.player1, [2, 0]);
 
-        expect(game.getResult()).to.be.equals('finished');
+        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
       });
     });
 
@@ -57,7 +59,7 @@ describe('Game', () => {
         game.play(game.player1, [0, 1]);
         game.play(game.player1, [0, 2]);
 
-        expect(game.getResult()).to.be.equals('finished');
+        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
       });
     });
 
@@ -67,7 +69,7 @@ describe('Game', () => {
         game.play(game.player1, [1, 1]);
         game.play(game.player1, [2, 2]);
 
-        expect(game.getResult()).to.be.equals('finished');
+        expect(game.getResult()).to.be.equals(GameStates.FINISHED);
       });
     });
   });
