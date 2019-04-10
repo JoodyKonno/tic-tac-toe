@@ -34,6 +34,14 @@ describe('Game', () => {
       ];
       expect(game.getBoardFields()).to.be.deep.equal(expectedOutput);
     });
+
+    context('when play is successful', () => {
+      it('register the turn', () => {
+        game.play(game.player1, [0, 0]);
+
+        expect(game.getLastTurn().char).to.be.equals('X');
+      });
+    });
   });
 
   describe('getResult()', () => {
