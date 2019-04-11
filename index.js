@@ -1,58 +1,55 @@
-const readLine = require('readline');
-
+const Player = require('./lib/Player');
+const GameInput = require('./lib/GameInput');
 const Game = require('./lib/Game');
 const GameBoard = require('./lib/GameBoard');
-const Player = require('./lib/Player');
+const GameStates = require('./lib/GameStates');
 
-const rl = readLine.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+const main = async () => {
+  console.log('Starting Tic Tac Toe');
 
+  const name1 = await GameInput.identifyName(1);
+  const char1 = await GameInput.identifyChar(1);
 
-rl.question('What do you think of Node.js? ', (answer) => {
-  // TODO: Log the answer in a database
-  console.log(`Thank you for your valuable feedback: ${answer}`);
+  console.log(`Player ${name1} has char ${char1}`);
+  const player1 = new Player(name1, char1);
 
-  rl.close();
-});
+  const name2 = await GameInput.identifyName(2);
+  const char2 = await GameInput.identifyChar(2);
 
-const game = new Game(new Player('Meat Ball'), new Player('Big Fetus'), new GameBoard());
+  console.log(`Player ${name2} has char ${char2}`);
+  const player2 = new Player(name2, char2);
 
-console.log('Starting Tic Tac Toe Game');
+  console.log('Initializing game');
+  const game = new Game(player1, player2, new GameBoard());
 
-console.log(`Player 1: ${game.getPlayer1Name()} with '${game.getPlayer1Char()}'`);
-console.log(`Player 2: ${game.getPlayer2Name()} with '${game.getPlayer2Char()}'`);
+  const rlPlays = GameInput.readPlays();
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+  console.log('play line and column starting by zero. Ex: 1,1 plays on the middle of the board');
 
-game.play(game.getPlayer1(), [1, 1]);
-console.log(`${game.getPlayer1Name()} plays on [1, 1]`);
+  console.log(`${game.getCurrentPlayer().getName()} starts`);
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+  rlPlays.on('line', (input) => {
+    console.log(`${game.getCurrentPlayer().getName()} plays on [${input}]`);
 
-game.play(game.getPlayer2(), [0, 0]);
-console.log(`${game.getPlayer2Name()} plays on [0, 0]`);
+    try {
+      const pos = input
+        .split(',')
+        .map(item => parseInt(item, 10));
+      game.play(pos);
+    } catch (err) {
+      console.error(err.message);
+    }
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+    console.log(game.getBoard());
+    console.log(`Game is ${game.getResult()}`);
+    console.log(`${game.getCurrentPlayer().getName()} turn`);
 
-game.play(game.getPlayer1(), [0, 2]);
-console.log(`${game.getPlayer1Name()} plays on [0, 2]`);
+    if (game.getResult() !== GameStates.IN_PROGRESS) {
+      process.exit(0);
+    } else {
+      console.log('play line and column starting by zero. Ex: 1,1 plays on the middle of the board');
+    }
+  });
+};
 
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
-
-game.play(game.getPlayer2(), [2, 2]);
-console.log(`${game.getPlayer2Name()} plays on [2, 2]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
-
-game.play(game.getPlayer1(), [2, 0]);
-console.log(`${game.getPlayer1Name()} plays on [2, 0]`);
-
-console.log(game.getBoard());
-console.log(`Game is ${game.getResult()}`);
+main();
