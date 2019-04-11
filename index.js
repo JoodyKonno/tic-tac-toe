@@ -26,8 +26,10 @@ const main = async () => {
 
   console.log('play line and column starting by zero. Ex: 1,1 plays on the middle of the board');
 
+  console.log(`${game.getCurrentPlayer().getName()} starts`);
+
   rlPlays.on('line', (input) => {
-    console.log(`${game.getPlayer1Name()} plays on [${input}]`);
+    console.log(`${game.getCurrentPlayer().getName()} plays on [${input}]`);
 
     try {
       const pos = input
@@ -40,6 +42,7 @@ const main = async () => {
 
     console.log(game.getBoard());
     console.log(`Game is ${game.getResult()}`);
+    console.log(`${game.getCurrentPlayer().getName()} turn`);
 
     if (game.getResult() !== GameStates.IN_PROGRESS) {
       process.exit(0);
