@@ -19,16 +19,6 @@ describe('Game', () => {
     game = new Game(player1, player2, new GameBoard());
   });
 
-  describe('constructor()', () => {
-    it('set the char "X" to the first player', () => {
-      expect(game.getPlayer1Char()).to.be.equal('X');
-    });
-
-    it('set the char "O" to the first player', () => {
-      expect(game.getPlayer2Char()).to.be.equal('O');
-    });
-  });
-
   describe('play()', () => {
     it('sets an input from player on board', () => {
       game.play([0, 0]);
